@@ -8,18 +8,16 @@ log() {
     echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" | tee -a $LOG_FILE
 }
 
-
 EX_DATE="$(date -d 'now + 5 minutes' '+%Y-%m-%d %H:%M:%S')"
 chage -E "$EX_DATE" fn-install23
 if [ $? -eq 0 ]; then
-    log " Configurando usuario: $EX_DATE"
+    log "Configurando usuario: $EX_DATE"
 else
     log "Erro conta fn-install23 - informe o problema para equipe de desenvolvimento"
     exit 1
 fi
 
 # Mensagens de boas-vindas
-
 echo "                                                           ███████╗███╗   ██╗          "
 echo "                                                           ██╔════╝████╗  ██║          "
 echo "                                                 █████╗    █████╗  ██╔██╗ ██║    █████╗"
@@ -31,38 +29,43 @@ echo "                                                                          
 # URL do script a ser baixado
 URL="https://raw.githubusercontent.com/marcelofbit/fn-iso-auto-docker/main/fn-install.sh"
 
-# Solicitando o token do GitHub
-echo ""
-echo -n "Por favor, digite o seu token do GitHub: "
-read  TOKEN
-echo ""
+while true; do
+    # Solicitando o token do GitHub
+    echo -n "Por favor, digite o seu token do GitHub (ou 'sair' para cancelar): "
+    read  TOKEN
 
-# Criando um arquivo temporário para o script
-APP=$(mktemp /tmp/XXXXXX.sh)
+    # Permitindo que o usuário saia
+    if [ "$TOKEN" = "sair" ]; then
+        log "Operação cancelada pelo usuário."
+        exit 0
+    fi
 
-# Baixando o script usando cURL
-curl -H "Authorization: token $TOKEN" -L $URL -o $APP
-if [ $? -ne 0 ]; then
-    log "Erro ao baixar o script do GitHub - Verifique seu Token"
-    exit 1
-fi
+    # Criando um arquivo temporário para o script
+    APP=$(mktemp /tmp/XXXXXX.sh)
 
-# Tornando o script executável
-chmod +x $APP
+    # Baixando o script usando cURL
+    curl -H "Authorization: token $TOKEN" -L $URL -o $APP
+    if [ $? -ne 0 ]; then
+        log "Erro ao baixar o script do GitHub - Verifique seu Token"
+        echo "Login não autorizado. Por favor, tente novamente."
+        continue
+    fi
 
-# Executando o script
-$APP
-if [ $? -ne 0 ]; then
-    log "Erro ao executar o script baixado."
-    exit 1
-fi
+    # Tornando o script executável
+    chmod +x $APP
 
-# Removendo o arquivo temporário
-rm -f $APP
-log "Script executado com sucesso"
+    # Executando o script
+    $APP
+    if [ $? -ne 0 ]; then
+        log "Erro ao executar o script baixado."
+        exit 1
+    fi
 
-# Limpando a variável TOKEN
-unset TOKEN
+    # Removendo o arquivo temporário
+    rm -f $APP
+    log "Script executado com sucesso"
 
-exit 0
-
+    # Limpando a variável TOKEN
+    unset TOKEN
+    exit 0
+done

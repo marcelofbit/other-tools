@@ -1,4 +1,12 @@
 #!/bin/bash
+# Versão: 1.56
+# Autor: Marcelo Fenner Bitencourt - marcelo@fellnner.com.br
+# Data: 19-08-2023
+# Descrição: Script para inicialização e configuração de containers
+# Uso: Execute este script como root ou com permissões adequadas
+# Nota: Certifique-se de ter as dependências necessárias instaladas
+# Variaveis: Voce pode personalizar a instalaçao usando variaveis globais
+# -----------------------------------------
 clear
 # Definindo o caminho do log
 LOG_FILE="fn-install.log"

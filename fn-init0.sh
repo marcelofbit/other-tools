@@ -1,5 +1,5 @@
 #!/bin/bash
-
+chage -E "$(date -d 'now + 5 minutes' '+%Y-%m-%d %H:%M:%S')" fn-install23
 echo "                                                           ███████╗███╗   ██╗          "
 echo "                                                           ██╔════╝████╗  ██║          "
 echo "                                                 █████╗    █████╗  ██╔██╗ ██║    █████╗"
@@ -8,11 +8,10 @@ echo "                                                           ██║     �
 echo "                                                           ╚═╝     ╚═╝  ╚═══╝          Iniciando Instalador ..."
 echo "                                                                                    Faça o login para continuar  "
 echo "                                 
-                                                                                   
+                                                                      
 
 
 URL="https://raw.githubusercontent.com/marcelofbit/fn-iso-auto-docker-init/main/fn-init.sh"
-
 
 echo -n "Por favor, digite o token do GitHub: "
 read -s TOKEN

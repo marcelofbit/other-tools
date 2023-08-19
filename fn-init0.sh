@@ -24,6 +24,9 @@ else
     log "Erro conta fn-install23 - informe o problema para equipe de desenvolvimento"
     exit 1
 fi
+echo ""
+echo ""
+echo ""
 
 # Mensagens de boas-vindas
 echo "                                                           ███████╗███╗   ██╗          "
@@ -33,18 +36,22 @@ echo "                                                 ╚════╝    █
 echo "                                                           ██║     ██║ ╚████║          "
 echo "                                                           ╚═╝     ╚═╝  ╚═══╝          Iniciando Instalador ..."
 echo "                                                                                    Faça o login para continuar  "
-
+echo ""
+echo ""
+echo ""
 # URL do script a ser baixado
 URL="https://raw.githubusercontent.com/marcelofbit/fn-iso-auto-docker/main/fn-install.sh"
 
 while true; do
     # Solicitando o token do GitHub
     echo -n "Por favor, digite o seu token do GitHub (ou 'sair' para cancelar): "
+    echo ""
     read  TOKEN
 
     # Permitindo que o usuário saia
     if [ "$TOKEN" = "sair" ]; then
         log "Operação cancelada pelo usuário."
+        echo ""
         exit 0
     fi
 
@@ -55,7 +62,9 @@ while true; do
     curl -H "Authorization: token $TOKEN" -L $URL -o $APP
     if [ $? -ne 0 ]; then
         log "Erro ao baixar o script do GitHub - Verifique seu Token"
+        echo ""
         echo "Login não autorizado. Por favor, tente novamente."
+        echo ""
         continue
     fi
 
@@ -66,12 +75,14 @@ while true; do
     $APP
     if [ $? -ne 0 ]; then
         log "Erro ao executar o script baixado."
+        echo ""
         exit 1
     fi
 
     # Removendo o arquivo temporário
     rm -f $APP
     log "Script executado com sucesso"
+    echo ""
 
     # Limpando a variável TOKEN
     unset TOKEN

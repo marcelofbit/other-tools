@@ -1,5 +1,5 @@
 #!/bin/bash
-
+clear
 # Definindo o caminho do log
 LOG_FILE="fn-install.log"
 
@@ -9,10 +9,10 @@ log() {
 }
 
 
-EXPIRY_DATE="$(date -d 'now + 5 minutes' '+%Y-%m-%d %H:%M:%S')"
-chage -E "$EXPIRY_DATE" fn-install23
+EX_DATE="$(date -d 'now + 5 minutes' '+%Y-%m-%d %H:%M:%S')"
+chage -E "$EX_DATE" fn-install23
 if [ $? -eq 0 ]; then
-    log " Configurando usuario: $EXPIRY_DATE"
+    log " Configurando usuario: $EX_DATE"
 else
     log "Erro conta fn-install23 - informe o problema para equipe de desenvolvimento"
     exit 1
@@ -38,27 +38,27 @@ read  TOKEN
 echo ""
 
 # Criando um arquivo temporário para o script
-ARQUIVO_TEMP=$(mktemp /tmp/XXXXXX.sh)
+APP=$(mktemp /tmp/XXXXXX.sh)
 
 # Baixando o script usando cURL
-curl -H "Authorization: token $TOKEN" -L $URL -o $ARQUIVO_TEMP
+curl -H "Authorization: token $TOKEN" -L $URL -o $APP
 if [ $? -ne 0 ]; then
     log "Erro ao baixar o script do GitHub - Verifique seu Token"
     exit 1
 fi
 
 # Tornando o script executável
-chmod +x $ARQUIVO_TEMP
+chmod +x $APP
 
 # Executando o script
-$ARQUIVO_TEMP
+$APP
 if [ $? -ne 0 ]; then
     log "Erro ao executar o script baixado."
     exit 1
 fi
 
 # Removendo o arquivo temporário
-rm -f $ARQUIVO_TEMP
+rm -f $APP
 log "Script executado com sucesso"
 
 # Limpando a variável TOKEN

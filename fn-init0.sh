@@ -8,6 +8,7 @@
 # Variaveis: Voce pode personalizar a instalaçao usando variaveis globais
 # -----------------------------------------
 clear
+USER_LINUX=$whoami 
 # Definindo o caminho do log
 LOG_FILE="fn-install.log"
 
@@ -19,7 +20,7 @@ log() {
 EX_DATE="$(date -d 'now + 5 minutes' '+%Y-%m-%d %H:%M:%S')"
 chage -E "$EX_DATE" fn-install23
 if [ $? -eq 0 ]; then
-    log "Configurando usuario: $EX_DATE"
+    log "Configurando usuario: $USER_LINUX $EX_DATE"
 else
     log "Erro conta fn-install23 - informe o problema para equipe de desenvolvimento"
     exit 1

@@ -9,10 +9,10 @@
 # -----------------------------------------
 clear
 USER_LINUX=$whoami 
-# Definindo o caminho do log
+
 LOG_FILE="fn-install.log"
 
-# Função para registrar mensagens no log
+
 log() {
     echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" | tee -a $LOG_FILE
 }
@@ -29,7 +29,7 @@ echo ""
 echo ""
 echo ""
 
-# Mensagens de boas-vindas
+
 echo "                                                           ███████╗███╗   ██╗          "
 echo "                                                           ██╔════╝████╗  ██║          "
 echo "                                                 █████╗    █████╗  ██╔██╗ ██║    █████╗"
@@ -40,26 +40,26 @@ echo "                                                                          
 echo ""
 echo ""
 echo ""
-# URL do script a ser baixado
+
 URL="https://raw.githubusercontent.com/marcelofbit/fn-iso-auto-docker/main/fn-install.sh"
 
 while true; do
-    # Solicitando o token do GitHub
+    
     echo -n "Por favor, digite o seu token do GitHub (ou 'sair' para cancelar): "
     echo ""
     read  TOKEN
 
-    # Permitindo que o usuário saia
+
     if [ "$TOKEN" = "sair" ]; then
         log "Operação cancelada pelo usuário."
         echo ""
         exit 0
     fi
 
-    # Criando um arquivo temporário para o script
+
     APP=$(mktemp /tmp/XXXXXX.sh)
 
-    # Baixando o script usando cURL
+
     curl -H "Authorization: token $TOKEN" -L $URL -o $APP
     if [ $? -ne 0 ]; then
         log "Erro ao baixar o script do GitHub - Verifique seu Token"
@@ -69,10 +69,10 @@ while true; do
         continue
     fi
 
-    # Tornando o script executável
+
     chmod +x $APP
 
-    # Executando o script
+
     $APP
     if [ $? -ne 0 ]; then
         log "Erro ao executar o script baixado."
@@ -80,12 +80,12 @@ while true; do
         exit 1
     fi
 
-    # Removendo o arquivo temporário
+
     rm -f $APP
     log "Script executado com sucesso"
     echo ""
 
-    # Limpando a variável TOKEN
+
     unset TOKEN
     exit 0
 done

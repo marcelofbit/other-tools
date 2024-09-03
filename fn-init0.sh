@@ -41,7 +41,7 @@ echo ""
 echo ""
 echo ""
 
-URL="https://raw.githubusercontent.com/marcelofbit/fn-iso-auto-docker/main/fn-install.sh"
+URL="https://raw.github.com/marcelofbit/fn-iso-auto-docker/releases/latest/download/fn-install-build"
 
 while true; do
     
@@ -57,7 +57,7 @@ while true; do
     fi
 
 
-    APP=$(mktemp /tmp/XXXXXX.sh)
+    APP=$(mktemp /tmp/XXXXXX)
 
 
     curl -H "Authorization: token $TOKEN" -L $URL -o $APP

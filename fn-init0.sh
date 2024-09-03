@@ -41,7 +41,7 @@ echo ""
 echo ""
 echo ""
 
-URL="https://raw.github.com/marcelofbit/fn-iso-auto-docker/releases/latest/download/fn-install-build"
+URL="https://github.com/marcelofbit/fn-iso-auto-docker/releases/download/v2024.09.03-16.31-e207279/fn-install"
 
 while true; do
     

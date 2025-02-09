@@ -1,7 +1,7 @@
 #!/bin/bash
-# Versão: 1.56
+# Versão: 1.57
 # Autor: Marcelo Fenner Bitencourt - marcelo@fellnner.com.br
-# Data: 19-08-2023
+# Data: 09-02-2025
 # Descrição: Script para inicialização e configuração de containers
 # Uso: Execute este script como root ou com permissões adequadas
 # Nota: Certifique-se de ter as dependências necessárias instaladas
@@ -12,8 +12,19 @@ clear
 USER_LINUX=$whoami 
 
 LOG_FILE="fn-install.log"
+echo ""
+echo ""
+echo "Instalando pacotes adicionais..."
 
-
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo usermod -aG docker $USER
+sudo usermod -aG docker fbconsultoria
+sudo curl -L "https://github.com/docker/compose/releases/download/v2.34.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+clear
 log() {
     echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" | tee -a $LOG_FILE
 }

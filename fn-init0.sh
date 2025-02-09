@@ -12,10 +12,13 @@ clear
 USER_LINUX=$whoami 
 
 LOG_FILE="fn-install.log"
+echo "                                                           ███████╗███╗   ██╗          "
+echo "                                                           ██╔════╝████╗  ██║          "
+echo "                                                 █████╗    █████╗  ██╔██╗ ██║    █████╗"
+echo "                                                 ╚════╝    ██╔══╝  ██║╚██╗██║    ╚════╝"
+echo "                                                           ██║     ██║ ╚████║          "
+echo "                                                           ╚═╝     ╚═╝  ╚═══╝          Instalando pacotes adicionais..."
 echo ""
-echo ""
-echo "Instalando pacotes adicionais..."
-
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 sudo systemctl start docker
@@ -29,14 +32,6 @@ log() {
     echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" | tee -a $LOG_FILE
 }
 
-EX_DATE="$(date -d 'now + 5 minutes' '+%Y-%m-%d %H:%M:%S')"
-chage -E "$EX_DATE" fn-install23
-if [ $? -eq 0 ]; then
-    log "Configurando usuario: $USER_LINUX $EX_DATE"
-else
-    log "Erro conta fn-install23 - informe o problema para equipe de desenvolvimento"
-    exit 1
-fi
 echo ""
 echo ""
 echo ""

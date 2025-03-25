@@ -1,7 +1,7 @@
 #!/bin/bash
-# Versão: 1.57
+# Versão: 1.58
 # Autor: Marcelo Fenner Bitencourt - marcelo@fellnner.com.br
-# Data: 09-02-2025
+# Data: 25-03-2025
 # Descrição: Script para inicialização e configuração de containers
 # Uso: Execute este script como root ou com permissões adequadas
 # Nota: Certifique-se de ter as dependências necessárias instaladas
